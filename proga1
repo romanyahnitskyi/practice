@@ -1,0 +1,23 @@
+def read(n):
+    a = []
+    for i in range(0, n):
+        try:
+            a.append(float(input()))
+
+        except:
+            print("Invalid type.")
+            exit(0)
+    return (a);
+def min(a):
+    min = a[0]
+    for i in range(0, len(a)):
+        if a[i] < min:
+            min = a[i]
+    return min
+try:
+    n=int(input())
+except:
+    print("Invalid type.")
+    exit(0)
+a=read(n);
+print(min(a))

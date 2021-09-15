@@ -19,5 +19,5 @@ try:
 except:
     print("Invalid type.")
     exit(0)
-a=read(n);
+a=read(n)
 print(min_product(a))

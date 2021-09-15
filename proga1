@@ -8,11 +8,11 @@ def read(n):
             print("Invalid type.")
             exit(0)
     return (a);
-def min(a):
-    min = a[0]
-    for i in range(0, len(a)):
-        if a[i] < min:
-            min = a[i]
+def min_product(a):
+    min = a[0]*a[1]
+    for i in range(0, len(a)-1):
+        if a[i]*a[i+1] < min:
+            min = a[i]*a[i+1]
     return min
 try:
     n=int(input())
@@ -20,4 +20,4 @@ except:
     print("Invalid type.")
     exit(0)
 a=read(n);
-print(min(a))
+print(min_product(a))

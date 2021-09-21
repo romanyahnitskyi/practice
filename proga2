@@ -32,13 +32,11 @@ def new_matrix(a,n,m):
     b=[]
     import copy
     b=copy.deepcopy(a)
-    print(b[1][1])
     for i in range(0, n):
         for j in range(0, m):
             sum=0
             for i_sum in range(0,i+1):
                 sum=sum+a[i_sum][j]
-            print(sum)
             b[i][j]=sum
 
     return b
@@ -57,4 +55,3 @@ while(repeat!='0'):
     a=read(n, m)
     print(new_matrix(a,n,m))
     repeat = input("Do you want continue?(Yes - Any , No - 0) ")
-    print(a)

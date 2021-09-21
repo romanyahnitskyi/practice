@@ -4,11 +4,11 @@ def read(n, m):
     for i in range(n):
         row = input().split()
         for i in range(len(row)):
-            try:
-                row[i] = int(row[i])
-            except:
-                row.pop(i)
-                i=i-1
+         if i<len(row):
+                try:
+                    row[i] = int(row[i])
+                except:
+                    row.pop(i)
         for i in range(len(row)):
             row[i] = int(row[i])
         while len(row)!=m:

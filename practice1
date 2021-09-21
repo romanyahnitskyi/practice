@@ -1,4 +1,4 @@
-def number_of_options(height, st_h, stac):
+def number_of_options(height, st_h, stac, dis_btw_cups):
     if height > 0:
         list = []
         for i in range(0, height + 1):
@@ -6,8 +6,8 @@ def number_of_options(height, st_h, stac):
         list[0] = 1
         for h in range(1, height + 1):
             for st in range(0, stac):
-                if h >= st_h + st:
-                    list[h] = list[h] + list[h - (st_h + st)]
+                if h >= st_h + st* dis_btw_cups:
+                    list[h] = list[h] + list[h - (st_h + st* dis_btw_cups)]
 
         return list[height] * 2
     if height == 0:
@@ -16,16 +16,17 @@ def number_of_options(height, st_h, stac):
         return (0)
 
 
-repeat = 1
-while repeat == 1:
+repeat = '1'
+while repeat !='0':
     bo = 0
     while bo == 0:
         try:
             height = int(input("required height: "))
             stac = int(input("possible number of stacks: "))
             st_h = int(input("glass height: "))
+            dis_btw_cups =int(input("distance between the cups: "))
             bo = 1
         except:
             print("Invalid type.")
-    print(number_of_options(height, st_h, stac))
-    repeat = int(input("Do you want continue?(Yes - 1 , No - 0) "))
+    print(number_of_options(height, st_h, stac, dis_btw_cups))
+    repeat = input("Do you want continue?(Yes - Any , No - 0) ")

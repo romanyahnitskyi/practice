@@ -1,0 +1,60 @@
+def read(n, m):
+    a = []
+    print("Enter the matrix.(One row in the line)")
+    for i in range(n):
+        row = input().split()
+        for i in range(len(row)):
+            try:
+                row[i] = int(row[i])
+            except:
+                row.pop(i)
+                i=i-1
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        while len(row)!=m:
+            if len(row)>m:
+                row.pop()
+            if len(row)<m:
+                tr = 1
+                while tr==1:
+                    try:
+                        row.append(int(input("The row is not complete. Add a number ")))
+                        tr=0
+                    except:
+                        print("Invalid type")
+
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        a.append(row)
+    return(a);
+
+def new_matrix(a,n,m):
+    b=[]
+    import copy
+    b=copy.deepcopy(a)
+    print(b[1][1])
+    for i in range(0, n):
+        for j in range(0, m):
+            sum=0
+            for i_sum in range(0,i+1):
+                sum=sum+a[i_sum][j]
+            print(sum)
+            b[i][j]=sum
+
+    return b
+
+
+repeat='1'
+while(repeat!='0'):
+    boo=1
+    while(boo==1):
+        try:
+            n = int(input("Enter size n: "))
+            m = int(input("Enter size m: "))
+            boo=0
+        except:
+            print("Invalid type.")
+    a=read(n, m)
+    print(new_matrix(a,n,m))
+    repeat = input("Do you want continue?(Yes - Any , No - 0) ")
+    print(a)

@@ -1,0 +1,127 @@
+def read(n,m):
+    a = []
+    print("Enter the matrix.(One row in the line)")
+    for i in range(n):
+        row = input().split()
+        for i in range(len(row)):
+            if i<len(row):
+                try:
+                    row[i] = int(row[i])
+                except:
+                    row.pop(i)
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        while len(row)!=m:
+            if len(row)>m:
+                row.pop()
+            if len(row)<m:
+                tr = 1
+                while tr==1:
+                    try:
+                        row.append(int(input("The row is not complete. Add a number ")))
+                        tr=0
+                    except:
+                        print("Invalid type")
+
+        for i in range(len(row)):
+            row[i] = int(row[i])
+        a.append(row)
+    return(a);
+import random
+def generate(n, m,a,b):
+    mat = []
+    for i in range(n):
+        row=[]
+        for j in range(n):
+            row.append(random.randint(a,b))
+        mat.append(row)
+    return(mat);
+def sort(a,n,m):
+    one_row=[]
+    kil=0
+    for i in range(n):
+        for j in range(m):
+            one_row.append(a[i][j])
+    for i in range(n*m-1):
+        for j in range(i+1,n*m):
+            if one_row[i]>one_row[j]:
+                temp=one_row[i]
+                one_row[i]=one_row[j]
+                one_row[j]=temp
+                kil=kil+1
+    i1=0
+    print("Number of operation: " ,kil)
+    for i in range(n):
+        for j in range(m):
+            a[i][j]=one_row[i1]
+            i1=i1+1
+    return a
+def binary_search(a,n,m,what):
+    one_row=[]
+    sort(a,n,m)
+    for i in range(n):
+        for j in range(m):
+            one_row.append(a[i][j])
+    first=0
+    last=n*m-1
+    while first!=last:
+        mid=int((last+first)/2)
+        if one_row[mid]<what:
+            first=mid+1
+        if one_row[mid]>what:
+            last=mid-1
+        if one_row[mid]==what:
+            last=mid
+            first=mid
+        if last<first:
+            last=first
+    if one_row[first]==what:
+        i=0
+        print(first)
+        while first>=m:
+            first=first-m
+            i=i+1
+        return (i,first)
+    else:
+        return("Not found")
+
+repeat='1'
+while(repeat!='0'):
+    boo=1
+    a=0
+    b=0
+    matr=[]
+    while(boo==1):
+        try:
+            n = int(input("Enter size n: "))
+            type = int(input("generate-0 enter-1 "))
+            if type==1:
+                boo=0
+            else:
+                if type==0:
+                    a = int(input("Enter a: "))
+                    b = int(input("Enter b: "))
+                    if a>b:
+                        tmp=a
+                        a=b
+                        b=tmp
+                    boo = 0
+                else:
+                    print("Type error")
+
+        except:
+            print("Invalid type.")
+    if type == 0:
+        matr=generate(n,n,a,b)
+    if type == 1:
+        matr=read(n,n)
+    boo=1
+    while(boo==1):
+        try:
+            what = int(input("Number to search: "))
+            boo=0
+        except:
+            print("Try again")
+    print(binary_search(matr,n,n,what))
+    print(matr)
+    repeat = input("Do you want continue?(Yes - Any , No - 0) ")

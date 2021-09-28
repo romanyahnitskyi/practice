@@ -3,14 +3,13 @@ def read(n,m):
     print("Enter the matrix.(One row in the line)")
     for i in range(n):
         row = input().split()
-        for i in range(len(row)):
-            if i<len(row):
-                try:
-                    row[i] = int(row[i])
-                except:
-                    row.pop(i)
-        for i in range(len(row)):
-            row[i] = int(row[i])
+        j=0
+        while j!=len(row):
+            try:
+                row[j] = int(row[j])
+                j=j+1
+            except:
+                row.pop(j)
         while len(row)!=m:
             if len(row)>m:
                 row.pop()
@@ -22,9 +21,6 @@ def read(n,m):
                         tr=0
                     except:
                         print("Invalid type")
-
-        for i in range(len(row)):
-            row[i] = int(row[i])
         a.append(row)
     return(a);
 import random
@@ -50,7 +46,7 @@ def sort(a,n,m):
                 one_row[j]=temp
                 kil=kil+1
     i1=0
-    print("Number of operation: " ,kil)
+    print("Number of operation to sort: " ,kil)
     for i in range(n):
         for j in range(m):
             a[i][j]=one_row[i1]
@@ -64,6 +60,7 @@ def binary_search(a,n,m,what):
             one_row.append(a[i][j])
     first=0
     last=n*m-1
+    num=0
     while first!=last:
         mid=int((last+first)/2)
         if one_row[mid]<what:
@@ -75,12 +72,13 @@ def binary_search(a,n,m,what):
             first=mid
         if last<first:
             last=first
+        num=num+1
     if one_row[first]==what:
         i=0
-        print(first)
         while first>=m:
             first=first-m
             i=i+1
+        print("Number of operation to find: ",num)
         return (i,first)
     else:
         return("Not found")
@@ -94,20 +92,21 @@ while(repeat!='0'):
     while(boo==1):
         try:
             n = int(input("Enter size n: "))
-            type = int(input("generate-0 enter-1 "))
-            if type==1:
-                boo=0
-            else:
-                if type==0:
-                    a = int(input("Enter a: "))
-                    b = int(input("Enter b: "))
-                    if a>b:
-                        tmp=a
-                        a=b
-                        b=tmp
-                    boo = 0
+            if n>0:
+                type = int(input("generate-0 enter-1 "))
+                if type==1:
+                    boo=0
                 else:
-                    print("Type error")
+                    if type==0:
+                        a = int(input("Enter a: "))
+                        b = int(input("Enter b: "))
+                        if a>b:
+                            tmp=a
+                            a=b
+                            b=tmp
+                        boo = 0
+                    else:
+                        print("Type error")
 
         except:
             print("Invalid type.")

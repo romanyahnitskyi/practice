@@ -1,10 +1,10 @@
-def read(n, m):
+def read(n,m):
     a = []
     print("Enter the matrix.(One row in the line)")
     for i in range(n):
         row = input().split()
         for i in range(len(row)):
-         if i<len(row):
+            if i<len(row):
                 try:
                     row[i] = int(row[i])
                 except:

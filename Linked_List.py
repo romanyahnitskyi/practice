@@ -1,13 +1,5 @@
 import random
-
-
-def n_bool(n):
-    if type(n) is int:
-        if n >= 0:
-            return True
-    return False
-
-
+from Validation import bool_n
 class node:
     def __init__(self, data, next):
         self.data = data
@@ -31,7 +23,7 @@ class linked_list:
             self.head = new_node
 
     def insert_pos(self, data, pos):
-        if n_bool(pos):
+        if bool_n(pos):
             if pos < self.length:
                 if pos!=0:
                     current = self.head
@@ -53,11 +45,12 @@ class linked_list:
     def print_list(self):
         current = self.head
         while (current != None):
-            print(current.data)
+            print(current.data,end=", ")
             current = current.next
+        print()
 
     def read(self, n):
-        if n_bool(n):
+        if bool_n(n):
             for i in range(n):
                 bool = True
                 while (bool):
@@ -71,23 +64,15 @@ class linked_list:
             print("Invalid type of n")
 
     def generate(self, n, a, b):
-        if n_bool(n):
-            if type(a) is int:
-                if type(b) is int:
-                    if a > b:
-                        temp = a
-                        a = b
-                        b = temp
-                    for i in range(n):
-                        self.insert(random.randint(a, b))
-                else:
-                    print("Invalid type of b")
-            else:
-                print("Invalid type of a")
+        if bool_n(n):
+            if a > b:
+                a, b = b, a
+            for i in range(n):
+                self.insert(random.randint(a, b))
         else:
             print("Invalid type of n")
     def delete(self, pos):
-        if n_bool(pos):
+        if bool_n(pos):
             if pos < self.length:
                 if pos != 0:
                     current = self.head

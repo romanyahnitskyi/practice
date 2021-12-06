@@ -2,7 +2,8 @@ import Receipt
 import Validation
 from Receipt import receipt
 import json
-
+from memento import Memento
+from copy import deepcopy
 
 class collection:
     def __init__(self):
@@ -48,7 +49,8 @@ class collection:
             self.update_file(str(file))
 
     def add_new(self,file):
-        self.col.append(Receipt.receipt(None, None, None, None, None, None, None))
+        id=input("id:")
+        self.col.append(Receipt.receipt(id, None, None, None, None, None, None))
         if Validation.Validation.valid_file_name(file):
             self.update_file(file)
 
@@ -75,4 +77,10 @@ class collection:
     def edit(self, id, key,file):
         if self.search_id(id)!=False:
             self.col[self.search_id(str(id))].edit_r(str(key))
+        if Validation.Validation.valid_file_name(file):
+            self.update_file(file)
+    def save_state(self):
+        return Memento(deepcopy(self.col))
+    def backup(self,memento,file):
+        self.col=memento.state
         self.update_file(file)

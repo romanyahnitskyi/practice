@@ -1,5 +1,6 @@
 from Collection import  collection
 from Validation import Validation
+from caretaker import CareTaker
 def main_menu_print():
     print("1: print collection")
     print("2: add")
@@ -7,7 +8,10 @@ def main_menu_print():
     print("4: search")
     print("5: edit")
     print("6: sort")
-    print("7: End_work")
+    print("7: save")
+    print("8: redo")
+    print("9: undo")
+    print("10: Exit")
 def submenu_sort_print():
     print("1. sort by ID")
     print("2. sort by name")
@@ -29,6 +33,7 @@ def submenu_edit_print():
 print("Input file name")
 file=Validation.input_file()
 my_collection=collection.read_file(file)
+c=CareTaker(my_collection)
 do_it=True
 while do_it:
     main_menu_print()
@@ -55,10 +60,16 @@ while do_it:
         submenu_sort_print()
         key=Validation.input_positive_num()
         if int(key) < 8:
-            my_collection.sort(key,file)
+            my_collection.sort(int(key),file)
         if int(key)>8:
             print("Invalid key")
-    elif opp==7:
+    elif opp == 7:
+        c.save()
+    elif opp == 8:
+        c.redo(file)
+    elif opp==9:
+        c.undo(file)
+    elif opp==10:
         do_it=False
 
 

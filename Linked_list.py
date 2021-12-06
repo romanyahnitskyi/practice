@@ -1,18 +1,39 @@
 import copy
 import random
+from observer import Observer
 from Validation import bool_n
+from event import Event
 class node:
     def __init__(self, data, next):
         self.data = data
         self.next = next
 
 
+
+
 class linked_list:
+    observers = []
+
+    def add_observer(self):
+        o = Observer()
+        linked_list.observers.append(o)
+    def delete_observer(self,o:Observer):
+        linked_list.observers.remove(o)
+    def notify(self,e:Event):
+        for i in range(len(linked_list.observers)):
+            linked_list.observers[i].update(e)
     def __init__(self):
         self.head = None
         self.length = 0
         self.for_iterator=node("smth",self.head)
 
+    def __str__(self):
+        current = self.head
+        stre=''
+        while (current != None):
+            stre+=str(current.data)+' '
+            current=current.next
+        return stre
 
     def insert(self, data):
         new_node = node(data, None)
@@ -47,12 +68,6 @@ class linked_list:
         else:
             print("Invalid pos type")
 
-    def print_list(self):
-        current = self.head
-        while (current != None):
-            print(current.data,end=", ")
-            current = current.next
-        print()
 
     def read(self, n):
         if bool_n(n):
@@ -93,6 +108,11 @@ class linked_list:
                     self.for_iterator = node("smth", self.head)
                 self.length=self.length-1
 
+    def delete_range(self, pos1,pos2):
+        if bool_n(pos1) and bool_n(pos2):
+            for i in range(pos1,pos2):
+                self.delete(pos1)
+
     def min_product(self):
         if(self.length>2):
             min=self.head.data*self.head.next.data
@@ -105,11 +125,16 @@ class linked_list:
 
     def __iter__(self):
         return Linked_List_Iterator(self.for_iterator)
-    def gen_elem_from(self,range):
-        while True:
-            self.insert(random.choice(range))
-            yield 1
 
+    def add_rand_elem(self,how_much,ranger):
+        asa = gen_elem_from(ranger)
+        for i in range(how_much):
+            what=next(asa)
+            self.insert(what)
+
+def gen_elem_from(range):
+    while True:
+        yield random.choice(range)
 
 
 class Linked_List_Iterator:

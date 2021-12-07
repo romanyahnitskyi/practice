@@ -37,7 +37,7 @@ class collection:
 
     def search_id(self, id):
         for i in range(len(self.col)):
-            if str(id) == self.col[i].id:
+            if str(id) == str(self.col[i].id):
                 return i
         return False
 
@@ -46,6 +46,7 @@ class collection:
             self.col.pop(self.search_id(str(id)))
         if Validation.Validation.valid_file_name(str(file)):
             self.update_file(str(file))
+
 
     def add_new(self,file):
         self.col.append(Receipt.receipt(None, None, None, None, None, None, None))
@@ -76,3 +77,8 @@ class collection:
         if self.search_id(id)!=False:
             self.col[self.search_id(str(id))].edit_r(str(key))
         self.update_file(file)
+    def all_data_to_json(self):
+        out=""
+        for i in range(len(self.col)):
+            out+=str(self.col[i].data_to_json()) +"\n"
+        return out

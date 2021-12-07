@@ -1,0 +1,1 @@
+{"id": "3", "first_name": "aaa", "last_name": "bbb", "email": "newwws@gmail.com", "password": "sha256$Et44Dq98lzBXGP7I$919c8e1f16e622d72494c635415d7c735e23ad53fafb924f195fa88072d9bf36", "is_admin": 1}

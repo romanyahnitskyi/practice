@@ -11,7 +11,7 @@ class Validation:
                 if int(num) <= 0:
                     print("Must be positive")
                     return False
-            except ValueError:
+            except:
                 print("Incorrect type")
                 return False
             return True
@@ -121,4 +121,34 @@ class Validation:
             do_it = Validation.valid_paymant_type(type_)
         return type_
 
+    @staticmethod
+    def str_to_sort_num(string):
+        if string=="ID":
+            return 1
+        if string=="name":
+            return 2
+        if string=="iban":
+            return 3
+        if string=="bank":
+            return 4
+        if string=="payment_type":
+            return 5
+        if string=="amount":
+            return 6
+        if string=="datatime":
+            return 7
+        return False
 
+    @staticmethod
+    def is_valid_email(email):
+        regex = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+        if regex.match(email):
+            return True
+
+        else:
+           return False
+    @staticmethod
+    def valid_status(type_):
+        if str(type_).lower() not in enums.status.__members__:
+            return False
+        return True
